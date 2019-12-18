@@ -21,6 +21,7 @@ module.exports = {
   },
   "rules": {
     "max-len": ["error", { code: 120 }],
+    "import/no-unresolved": [2, { ignore: ['^react(-native)?$'] }],
     "object-curly-newline": ["error", {
       "ObjectExpression": { "multiline": true, "minProperties": 4, consistent: true },
       "ObjectPattern": { "multiline": true, "minProperties": 4, consistent: true },
