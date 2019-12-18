@@ -26,6 +26,8 @@ npm i react-native-smooth-pincode-input
 
 ## Available props
 
+**Other props are passed down to react-native TextInput!**
+
 |          Name         |          Type         | Default | Description                                                                                                                                                                                                                                                        |
 |:---------------------:|:---------------------:|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | containerStyle        | React View StyleSheet | {}      | View style for whole container                                                                                                                                                                                                                                     |
@@ -46,5 +48,3 @@ npm i react-native-smooth-pincode-input
 | mask                  | String                | '*'     | Value to mask the input with                                                                                                                                                                                                                                       |
 | maskDelay             | Number                | 200     | The delay in milliseconds before a character is masked                                                                                                                                                                                                             |
 | animationType         | String, Object        | 'pulse' | The animation of the focused cell. This can be a preset animation in the form of a [string](https://github.com/oblador/react-native-animatable#animations-2) or a [custom animation](https://github.com/oblador/react-native-animatable#custom-animations) object. |
-
-**Other props are passed down to react-native TextInput!**
