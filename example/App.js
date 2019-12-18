@@ -16,7 +16,6 @@ export default function App() {
     } else {
       setPin(value);
     }
-
   }, []);
 
   return (

@@ -21,7 +21,7 @@ module.exports = {
   },
   "rules": {
     "max-len": ["error", { code: 120 }],
-    "import/no-unresolved": [2, { ignore: ['^react(-native)?$'] }],
+    "import/no-extraneous-dependencies": ["error", { peerDependencies: true }],
     "object-curly-newline": ["error", {
       "ObjectExpression": { "multiline": true, "minProperties": 4, consistent: true },
       "ObjectPattern": { "multiline": true, "minProperties": 4, consistent: true },
