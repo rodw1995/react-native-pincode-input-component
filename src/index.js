@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
 
 const PinInput = forwardRef(({
   containerStyle, contentContainerStyle, cellStyle, cellFocusedStyle, cellFilledStyle, textStyle, textFocusedStyle,
-  value, onValueChange, codeLength, password, placeholder, restrictToNumbers, cellSize, cellSpacing, mask, maskDelay,
-  animationType, ...props
+  value, onValueChange, codeLength, password, placeholder, restrictToNumbers, autoFocus, cellSize, cellSpacing, mask,
+  maskDelay, animationType, ...props
 }, forwardedRef) => {
   const animatableRef = useRef();
   const inputRef = useRef();
@@ -89,7 +89,7 @@ const PinInput = forwardRef(({
     previousInputRef.current = input;
   }, [password, restrictToNumbers, onValueChange, codeLength]);
 
-  const isFocused = inputRef.current ? inputRef.current.isFocused() : false;
+  const isFocused = inputRef.current ? inputRef.current.isFocused() : autoFocus;
 
   return (
     <Animatable.View
@@ -173,6 +173,7 @@ const PinInput = forwardRef(({
         ref={inputRef}
         value={value}
         onChangeText={onChange}
+        autoFocus={autoFocus}
         spellCheck={false}
         numberOfLines={1}
         caretHidden
@@ -188,7 +189,7 @@ const PinInput = forwardRef(({
   );
 });
 
-PincodeInput.propTypes = {
+PinInput.propTypes = {
   containerStyle: ViewPropTypes.style,
   contentContainerStyle: ViewPropTypes.style,
   cellStyle: ViewPropTypes.style,
@@ -205,6 +206,7 @@ PincodeInput.propTypes = {
     PropTypes.element,
   ]),
   restrictToNumbers: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   cellSize: PropTypes.number,
   cellSpacing: PropTypes.number,
   mask: PropTypes.oneOfType([
@@ -232,6 +234,7 @@ PinInput.defaultProps = {
   password: false,
   placeholder: '',
   restrictToNumbers: false,
+  autoFocus: false,
   cellSize: 48,
   cellSpacing: 4,
   mask: '*',
