@@ -18,10 +18,10 @@ Original from https://github.com/xamous/react-native-smooth-pincode-input but im
 
 ```sh
 # yarn
-yarn add react-native-smooth-pincode-input
+yarn add react-native-pincode-input-component
 
 # npm
-npm i react-native-smooth-pincode-input
+npm i react-native-pincode-input-component
 ```
 
 ## Available props
