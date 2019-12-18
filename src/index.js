@@ -44,13 +44,14 @@ const styles = StyleSheet.create({
 
 const PinInput = forwardRef(({
   containerStyle, contentContainerStyle, cellStyle, cellFocusedStyle, cellFilledStyle, textStyle, textFocusedStyle,
-  value, onValueChange, codeLength, password, placeholder, restrictToNumbers, autoFocus, cellSize, cellSpacing, mask,
-  maskDelay, animationType, ...props
+  value, onValueChange, onFocus, onBlur, codeLength, password, placeholder, restrictToNumbers, cellSize, cellSpacing,
+  mask, maskDelay, animationType, ...props
 }, forwardedRef) => {
   const animatableRef = useRef();
   const inputRef = useRef();
   const previousInputRef = useRef(value);
 
+  const [focused, setFocused] = useState(false);
   const [doMask, setDoMask] = useState(false);
 
   useImperativeHandle(forwardedRef, () => ({
@@ -89,7 +90,19 @@ const PinInput = forwardRef(({
     previousInputRef.current = input;
   }, [password, restrictToNumbers, onValueChange, codeLength]);
 
-  const isFocused = inputRef.current ? inputRef.current.isFocused() : autoFocus;
+  const onFocused = useCallback((...args) => {
+    setFocused(true);
+    if (onFocus) {
+      onFocus(...args);
+    }
+  }, [onFocus]);
+
+  const onBlurred = useCallback((...args) => {
+    setFocused(false);
+    if (onBlur) {
+      onBlur(...args);
+    }
+  }, [onBlur]);
 
   return (
     <Animatable.View
@@ -107,7 +120,7 @@ const PinInput = forwardRef(({
         {
           // eslint-disable-next-line prefer-spread
           Array.apply(null, Array(codeLength)).map((_, idx) => {
-            const cellFocused = isFocused && idx === value.length;
+            const cellFocused = focused && idx === value.length;
             const filled = idx < value.length;
             const last = (idx === value.length - 1);
             const showMask = filled && (password && (!doMask || !last));
@@ -146,7 +159,7 @@ const PinInput = forwardRef(({
                   cellFocused ? StyleSheet.flatten([styles.cellFocused, cellFocusedStyle]) : {},
                   filled ? cellFilledStyle : {},
                 ])}
-                animation={idx === value.length && isFocused ? animationType : null}
+                animation={idx === value.length && focused ? animationType : null}
                 iterationCount="infinite"
                 duration={500}
               >
@@ -173,7 +186,8 @@ const PinInput = forwardRef(({
         ref={inputRef}
         value={value}
         onChangeText={onChange}
-        autoFocus={autoFocus}
+        onFocus={onFocused}
+        onBlur={onBlurred}
         spellCheck={false}
         numberOfLines={1}
         caretHidden
@@ -199,6 +213,8 @@ PinInput.propTypes = {
   textFocusedStyle: Text.propTypes.style,
   value: PropTypes.string,
   onValueChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   codeLength: PropTypes.number,
   password: PropTypes.bool,
   placeholder: PropTypes.oneOfType([
@@ -206,7 +222,6 @@ PinInput.propTypes = {
     PropTypes.element,
   ]),
   restrictToNumbers: PropTypes.bool,
-  autoFocus: PropTypes.bool,
   cellSize: PropTypes.number,
   cellSpacing: PropTypes.number,
   mask: PropTypes.oneOfType([
@@ -230,11 +245,12 @@ PinInput.defaultProps = {
   textFocusedStyle: {},
   value: '',
   onValueChange: null,
+  onFocus: null,
+  onBlur: null,
   codeLength: 4,
   password: false,
   placeholder: '',
   restrictToNumbers: false,
-  autoFocus: false,
   cellSize: 48,
   cellSpacing: 4,
   mask: '*',
