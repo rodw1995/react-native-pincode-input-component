@@ -1,0 +1,44 @@
+{
+  "name": "react-native-pincode-input-component",
+  "version": "0.0.1",
+  "description": "A cross-platform customizable PIN code input component for React Native.",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rodw1995/react-native-pincode-input-component.git"
+  },
+  "keywords": [
+    "react-native",
+    "pin",
+    "pincode",
+    "input",
+    "password",
+    "TextInput"
+  ],
+  "author": "Robbie op de Weegh <robbieopdeweegh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rodw1995/react-native-pincode-input-component/issues"
+  },
+  "homepage": "https://github.com/rodw1995/react-native-pincode-input-component",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react-native-animatable": "^1.3.3"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-react-native": "^3.8.1"
+  }
+}
